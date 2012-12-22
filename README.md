@@ -61,4 +61,4 @@ Brunch is the tool we use to get our webpage in the right format and pull togeth
 
 Open a web browser and type in the following URL
 
-    [http://localhost:3333]
+    http://localhost:3333
