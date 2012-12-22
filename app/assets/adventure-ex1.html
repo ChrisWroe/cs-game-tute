@@ -1,0 +1,11 @@
+<!DOCTYPE html><html lang="en"><head><title>Wroe Family Adventure Game</title><script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script><link rel="stylesheet" href="stylesheets/app.css"><!--script(type="text/javascript",src="http://github.com/jashkenas/coffee-script/raw/master/extras/coffee-script.js")--><script type="text/javascript">
+(function() {
+
+  $(function() {
+    return $('#doit').click(function() {
+      return $('#response').append("<p>" + ($('#instruction').val()) + "</p>");
+    });
+  });
+
+}).call(this);
+</script></head><body class="application"><div class="container"><div class="row"><div class="span9 offset1"><h1>Isabel and William's Adventure Game</h1><h2>First step</h2></div></div><div class="row"><div id="response" class="span9 offset1 monitor"></div></div><div class="row"><div class="span9 offset1 input"><div class="input-append"><input id="instruction" type="text" placeholder="tell me what to do..." class="span8"><button id="doit" type="submit" class="btn">Do it</button></div></div></div></div></body></html>

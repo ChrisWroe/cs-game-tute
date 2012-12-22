@@ -1,53 +1,72 @@
-cs-game-tut
-===========
+# Brunch with Chaplin
+![](https://a248.e.akamai.net/camo.github.com/b7ebb8bbcec7938940cf8e9c441124c3bddafd3a/687474703a2f2f662e636c2e6c792f6974656d732f34373039326b30423141334a317a3166306b34362f6277632e706e67)
 
-An experiment in teaching my kids to program adventure games in coffee script. 
+Brunch with Chaplin is a skeleton (boilerplate) for [Brunch](http://brunch.io)
+based on [Chaplin](http://chaplinjs.org) framework.
 
-### CoffeeScript
+Requires Brunch 1.4+.
 
-[CoffeeScript](http://coffeescript.org) is a fun language that translates in to JavaScript. JavaScript is less fun to me but is the language used in web browsers, and everything seems to be done in a web browser these days. I could teach my kids about programming using Python which is a popular starting language but the immediate results in a web page seem appealing to me.
+## Getting started
+* Create new project via executing `brunch new <project name>`.
+Brunch with chaplin is a default application skeleton for Brunch,
+so you don't need to specify `--skeleton` option for the command.
+* Build the project with `brunch b` or `brunch w`.
+* Open the `public/` dir to see the result.
+* Write your code.
 
-### Why and adventure game
+Example application built with the skeleton:
+[Ost.io](https://github.com/paulmillr/ostio).
 
-My kids have spent a fair amount of time making up adventure games on paper and understand the idea. Transferring it in to a text based program seems like it may be a useful way to get the concepts of programming and possibly web based programming. My plan is to do it as a collection of simple exercises each showing one more feature. 
+See [Chaplin site](http://chaplinjs.org) for docs and more info.
 
-## Installation
+## Difference from Chaplin Boilerplate
+[Chaplin Boilerplate](https://github.com/chaplinjs/chaplin-boilerplate)
+is a official boilerplate all for chaplin. This skeleton is almost the same,
+except a few changes:
 
-Install node.js from the [website](http://nodejs.org/). node.js lets you run JavaScript outside a web browser. We wont be writing our programs in JavaScript but will rely on it in the background.
+* Added Header.
+* CommonJS is used instead of AMD, because it's easier to use & debug.
 
-Install [brunch](http://brunch.io) by typing the following in a console. 
+## Features
+* HTML5Boilerplate html & css are included.
+* CoffeeScript + Stylus + Handlebars as app languages
+(you can change this to anything you want)
+* Backbone as main MVC/MVP library, Chaplin as meta-framework.
+* Support of IE8 and up.
+* Cross-module communication using the Mediator and Publish/Subscribe patterns
+* Controllers for managing individual UI views
+* Rails-style routes which map URLs to controller actions
+* An application view as dispatcher and view manager
+* Extended model, view and collection classes to avoid repetition and
+enforce conventions
+* Strict memory management and object disposal
+* A collection with additional manipulation methods for smarter change events
+* A collection view for easy and intelligent list rendering
 
-    npm install -g brunch
+## Authentication
+If you build an application with authentication, there are some useful abstractions for it out there: https://github.com/chaplinjs/chaplin-auth.
 
-We may also need CoffeeScript in the background (not sure)
+## License
+The MIT license.
 
-    npm install -g coffeescript
+Copyright (c) 2012 Paul Miller (http://paulmillr.com/)
 
->### What is the console
+Copyright (c) 2012 Moviepilot GmbH, 9elements GmbH et al.
 
->A console is a program that lets you type text based instructions for the computer to perform. It is also sometimes called the command line or terminal. Usually you get the computer to do something by clicking on a menu option or button on the screen. This is called a graphic user interface (GUI). For some things there isn't a GUI available to do what you want so you have to type the instruction in as text in the console. As time goes on somethings just get easier to do using these text commands. 
+Permission is hereby granted, free of charge, to any person obtaining a copy of
+this software and associated documentation files (the "Software"), to deal in
+the Software without restriction, including without limitation the rights to
+use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies
+of the Software, and to permit persons to whom the Software is furnished to do
+so, subject to the following conditions:
 
->To access the console on a Mac, open the terminal application. To access the console on a Windows machine you can select Start->Run and type cmd.exe in the box
-    
-Starting from scratch is hard, so there is some code already here in this github project. As I finish each exercise I'll post the exercise starting and complete example code. To get the code you need to install an application to talk to the github website and download the code. Go to the [set up git](https://help.github.com/articles/set-up-git) page for detailed information on what to do. In short go to the [git downloads](http://git-scm.com/downloads) page, grab the application and install it on your machine. Alternatively if you are using a Mac you could use one of the GUI Git applications (https://central.github.com/mac/latest). When its working you want to 'clone' the code. That will put a local copy of the code on your computer. It will also keep track of where you got it, so if I update it on github, you can 'pull' down the updates.
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
 
-Go to a suitable directory on your hard drive.
-
->### Directories and using the cd command
-
->    cd {put the path to the directory here}
-    
->cd stands for 'Change Directory'. The hard drive is made up of many directories containing files and other directories. If one directory is within another one it is written after the other one with a slash between the two. On a Windows machine the slash is backwards '\'. On a Mac it is forwards '/'
-
-Clone the code!
-
-    git clone https://github.com/ChrisWroe/cs-game-tute.git
-    
-You should now have a new directory called cs-game-tut, move to it by using the cd command
-
-    cd cs-game-tute
-
-
-
-
-
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.

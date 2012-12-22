@@ -1,0 +1,28 @@
+doctype 5
+html(lang="en")
+    head
+        title Wroe Family Adventure Game
+       
+        script(type="text/javascript", src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js")
+        link(rel="stylesheet",href="stylesheets/app.css")
+        //script(type="text/javascript",src="http://github.com/jashkenas/coffee-script/raw/master/extras/coffee-script.js")
+        :coffeescript
+            # i would have rooms to start with and ways to move around rooms
+            $ -> 
+                $('#doit').click(()->
+                    $('#response').append("<p>#{$('#instruction').val()}</p>")
+                )
+    body.application
+        .container
+            .row
+                .span9.offset1
+                    h1 Isabel and William's Adventure Game
+                    h2 First step
+            .row
+                .span9.offset1.monitor#response
+            .row
+                .span9.offset1.input
+                    .input-append
+                        input.span8#instruction(type="text",placeholder="tell me what to do...")
+                        button.btn#doit(type="submit") Do it
+                        
