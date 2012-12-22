@@ -10,24 +10,32 @@ html(lang="en")
         link(rel="stylesheet",href="stylesheets/app.css")
         //script(type="text/javascript",src="http://github.com/jashkenas/coffee-script/raw/master/extras/coffee-script.js")
         :coffeescript
-            # i would have rooms to start with and ways to move around rooms
+            move_regex = /go (north|south|east|west)/i
+            obey_instruction = (instruction)->
+                move_info = move_regex.exec(instruction)
+                response = ''
+                if move_info?
+                    direction=move_info[1]
+                    response = "You went #{direction}"
+                else
+                    response = "I don't understand yet"
+                response
+            
             $ -> 
                 $('#doit').click(()->
-                    $('#response').append("<p>#{$('#instruction').val()}</p>")
+                    instruction = $('#instruction').val() # the text within the box
+                    response = obey_instruction(instruction)
+                    $('#response').append("<p>#{response}</p>")
                 )
     body.application
         .container
             .row
                 .span9.offset1
                     h1 Isabel and William's Adventure Game
-                    h2 First step
+                    h2 Second step
                     p
-                        | This first step shows you the basics of the game. There is an area where the game
-                        | tells you what is happening. At the bottom is a box in which you can type in instructions.
-                        | Next to it is a button which if you click will tell the character to do that thing.
-                    p
-                        | It is basic at the moment. If you press the button it just repeats that text in the box 
-                        | above it.
+                        | In this second step we will get the game to respond to specific instructions. The most
+                        | useful first one would be moving around.
             .row
                 .span9.offset1.monitor#response
             .row

@@ -1,0 +1,81 @@
+doctype 5
+html(lang="en")
+    head
+        title Wroe Family Adventure Game
+       
+        
+        script(src="javascripts/vendor.js")
+        script(src="javascripts/app.js")
+        //script(type="text/javascript", src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js")
+        link(rel="stylesheet",href="stylesheets/app.css")
+        //script(type="text/javascript",src="http://github.com/jashkenas/coffee-script/raw/master/extras/coffee-script.js")
+        script
+            hljs.initHighlightingOnLoad();
+        :coffeescript
+            
+
+            $ -> 
+                $('#doit').click(()->
+                    instruction = $('#instruction').val() # the text within the box
+                    response = instruction
+                    $('#response').append("<p>#{response}</p>")
+                )
+    body.application
+        .container
+            .row
+                .span9.offset1
+                    h1 Isabel and William's Adventure Game
+                    h2 Second step
+                    p.
+                        In this second step we will get the game to respond to specific instructions. The most
+                        useful first one would be moving around.
+                    p.
+                        For this you need to add some new functionality. You do this by adding a function. 
+                        We will give our function a name 'obey_instruction'. You can't use  spaces in names within 
+                        programs. It gets it confused.
+                    p.
+                        So first of all add the following below the ':coffeescript' in adventure-ex2.jade.
+                        Be sure to press tab so that the code you are entering is indented. Indenting is very 
+                        important in the set of languages we are using. It tells the computer what bits belong to what. 
+                        By indenting are code we are telling it that it belongs to the coffeescript section and should
+                        be treated as coffeescript code.
+                    pre
+                        code.
+                            obey_instruction = (instruction)->
+                                move_regex = /go (north|south|east|west)/i
+                                move_info = move_regex.exec(instruction)
+                                response = ''
+                                if move_info?
+                                    direction=move_info[1]
+                                    response = "You went \#{direction}"
+                                else
+                                    response = "I don't understand yet"
+                                response
+                    p
+                        | Lets break this down. 
+                    pre
+                        code
+                            | obey_instruction = (instruction)->
+                    p
+                        | This line says we want to tell you about our new function 'obey_instruction' and
+                        | that it will take one variable called 'instruction'. That is the thing in brackets.
+                        | Things in brackets are usually the things that we are feeding the function.
+                    pre
+                        code
+                            |    move_regex = /go (north|south|east|west)/i
+                    p
+                        | This next line is indented. Remember indenting it tells the computer what something belongs to. 
+                        | These next lines belong to the function 'obey_instruction'.
+                    p
+                        | This is 
+            .row
+                .span9.offset1.monitor#response
+            .row
+                .span9.offset1.input
+                    .input-append
+                        input.span8#instruction(type="text",placeholder="tell me what to do...")
+                        button.btn#doit(type="submit") Do it
+            .row.
+                <a rel="license" href="http://creativecommons.org/licenses/by/3.0/deed.en_US"><img alt="Creative Commons License" style="border-width:0" src="http://i.creativecommons.org/l/by/3.0/88x31.png" /></a><br /><span xmlns:dct="http://purl.org/dc/terms/" property="dct:title">CoffeeScript Adventure Games Tutorial</span> by <a xmlns:cc="http://creativecommons.org/ns#" href="https://github.com/ChrisWroe/cs-game-tute" property="cc:attributionName" rel="cc:attributionURL">Chris Wroe</a> is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by/3.0/deed.en_US">Creative Commons Attribution 3.0 Unported License</a>.
+       
+                        
