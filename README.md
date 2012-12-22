@@ -46,3 +46,19 @@ Clone the code!
 You should now have a new directory called cs-game-tut, move to it by using the cd command
 
     cd cs-game-tute
+
+## Time to serve
+
+Usually when you open a web page in a browser the browser contacts another computer on the internet called the server, and the server sends back the web page. The server 'serves' the web page. To get our browser based game going it is best if we start a server to serve our adventure game web page. In the cs-game-tute directory type the following command in the console
+
+    brunch watch --server
+    
+or shorthand
+
+    brunch w -s
+    
+Brunch is the tool we use to get our webpage in the right format and pull together any helper files that we may need. The watch command tells it to keep watching if we have edited our web pages, and if so serve the new version. --server means go ahead and start a simple web server.
+
+Open a web browser and type in the following URL
+
+    [http://localhost:3333]
