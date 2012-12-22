@@ -3,7 +3,10 @@ html(lang="en")
     head
         title Wroe Family Adventure Game
        
-        script(type="text/javascript", src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js")
+        
+        script(src="javascripts/vendor.js")
+        script(src="javascripts/app.js")
+        //script(type="text/javascript", src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js")
         link(rel="stylesheet",href="stylesheets/app.css")
         //script(type="text/javascript",src="http://github.com/jashkenas/coffee-script/raw/master/extras/coffee-script.js")
         :coffeescript
@@ -25,4 +28,5 @@ html(lang="en")
                     .input-append
                         input.span8#instruction(type="text",placeholder="tell me what to do...")
                         button.btn#doit(type="submit") Do it
+       
                         
