@@ -8,7 +8,7 @@ html(lang="en")
         script(src="javascripts/app.js")
         link(rel="stylesheet",href="stylesheets/app.css")
         :coffeescript
-            # i would have rooms to start with and ways to move around rooms
+            # this is the only bit of program in the web page at the moment
             $ -> 
                 $('#doit').click(()->
                     $('#response').append("<p>#{$('#instruction').val()}</p>")
@@ -17,16 +17,60 @@ html(lang="en")
         .container
             .row
                 .span9.offset1
-                    h1 Isabel and William's Adventure Game
-                    h2 First step
+                    // change this here
+                    h1 Wroe Family Treasure Hunt
+                    h2 First Clue
+                    // change this here
                     p
                         | This first step shows you the basics of the game. There is an area where the game
                         | tells you what is happening. At the bottom is a box in which you can type in instructions.
                         | Next to it is a button which if you click will tell the character to do that thing.
+             .row
+                .span9.offset1.monitor#response
+            .row
+                .span9.offset1.input
+                    .input-append
+                        input.span8#instruction(type="text",placeholder="tell me what to do...")
+                        button.btn#doit(type="submit") Do it
+                    a(name="editor")
                     p
                         | It is basic at the moment. If you press the button it just repeats that text in the box 
-                        | above it. The aim of this exercise is for you to understand enough to change a bit of the webpage. 
-                        | The title at the top of the page for example.
+                        | above it. Go on try it!
+                    p
+                        | The aim of this exercise is for you to understand enough to change a bit of the webpage. 
+                        | The title at the top of the page for example. I'll just give you enough info to change something, 
+                        | then to understand exactly what you are doing read the rest of this web page.
+                    p.
+                        Open up the following file in a text editor. See <a href="#editor">what is a text editor</a>
+                         for more info.
+                    pre
+                        code app/jade-doc/adventure-ex1.jade
+                    p.
+                        Look for some text near the top of the file that says this
+                    // dont change this one this is just the instructions!
+                    pre
+                        code.
+                            h1 Wroe Family Adventure Game
+                            h2 First step
+                    p.
+                        Change the text after the h1 or h2 to something else then reload the page in the browser. That is click the circular arrows.
+                    h3 What is a text editor?
+                        
+                    
+                    p.
+                        You are probably taught at school about writing documents using something 
+                        like Microsoft Word. They are called WYSIWYG editors (What you see is what you get). If you want text
+                         to appear a certain way you select that text and select a menu option to change its appearence
+                         right in front of you. Behind the scenes, the program is storing extra information in the file 
+                         about how the words should appear but you don't see that extra information. 
+                    p.
+                        In a text editor, you
+                          can't change how individual words look. What you see is all the information stored in the file. 
+                         Text editors are useful for editing files that contain instructions for the computer rather than 
+                         instructions for people. This text was written in a text editor called <a href="http://macromates.com">
+                          TextMate</a> on a Mac. Another text editor for the Mac I have used is 
+                         <a href="http://www.barebones.com/products/textwrangler/">TextWrangler</a>.
+                          On Windows I have used <a href="http://notepad-plus-plus.org/">Notepad++</a>
                     h3 Languages of the Web
                     p.
                         First of all, I need to explain a bit about computer languages. Computers aren't clever enough to
@@ -66,7 +110,7 @@ html(lang="en")
                              out players for their teams. Each team of tags is then given a specific instruction such as 'be red'.<br> 
                              <code>.warning {color:red;} </code>. This says make all tags in the warning class red. Classes are 
                              selected using '.'. Names (ids) are selected using the '#'.<br>
-                             <code>#Bill {background-color:blue;} </code>. This says make the tag with the name (id) 'Bill' blue. Go to 
+                             <code>#Bill {background-color:blue;} </code>. This says make the tag with the name (id) 'Bill' be blue. Go to 
                              <a href="http://www.w3schools.com/css/default.asp">W3C Schools</a> for more information on CSS.
                         dt JavaScript
                         dd
@@ -121,19 +165,31 @@ html(lang="en")
                               pre
                                 code.
                                     alert 'Hello'
-                                    
+                    h3 Putting it together
+                    p.
+                        In the installation instructions you came across a tool called <a href="http://brunch.io">brunch</a>. 
+                        We use this tool to take the files we have written in jade, stylus, and coffeescript and
+                        translate it in to the HTML, CSS, and JavaScript. 
+                    p I've put the jade files in:
+                    pre
+                        code app/jade-doc
+                    p For example this web page is written in jade and I've put it here:
+                    pre
+                        code app/jade-doc/adventure-ex1.jade
+                    p I've put the stylus file here:
+                    pre
+                        code app/jade-doc/application.styl
+                    p.
+                        I haven't added any coffeescript files yet. To make it a bit simpler I've just put the coffeescript 
+                        in the jade file after the following bit of magic:
+                    pre
+                        code :coffeescript
                     h3 Help from others
-                    h3 So how can I change something
+                    h3 So how can I change something?
                                 
-            .row
-                .span9.offset1.monitor#response
-            .row
-                .span9.offset1.input
-                    .input-append
-                        input.span8#instruction(type="text",placeholder="tell me what to do...")
-                        button.btn#doit(type="submit") Do it
+           
             .row.
                 <a rel="license" href="http://creativecommons.org/licenses/by/3.0/deed.en_US"><img alt="Creative Commons License" style="border-width:0" src="http://i.creativecommons.org/l/by/3.0/88x31.png" /></a><br /><span xmlns:dct="http://purl.org/dc/terms/" property="dct:title">CoffeeScript Adventure Games Tutorial</span> by <a xmlns:cc="http://creativecommons.org/ns#" href="https://github.com/ChrisWroe/cs-game-tute" property="cc:attributionName" rel="cc:attributionURL">Chris Wroe</a> is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by/3.0/deed.en_US">Creative Commons Attribution 3.0 Unported License</a>.
                 
        
-                        
+                                     
