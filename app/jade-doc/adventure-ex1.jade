@@ -6,9 +6,7 @@ html(lang="en")
         
         script(src="javascripts/vendor.js")
         script(src="javascripts/app.js")
-        //script(type="text/javascript", src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js")
         link(rel="stylesheet",href="stylesheets/app.css")
-        //script(type="text/javascript",src="http://github.com/jashkenas/coffee-script/raw/master/extras/coffee-script.js")
         :coffeescript
             # i would have rooms to start with and ways to move around rooms
             $ -> 
@@ -29,6 +27,7 @@ html(lang="en")
                         | It is basic at the moment. If you press the button it just repeats that text in the box 
                         | above it. The aim of this exercise is for you to understand enough to change a bit of the webpage. 
                         | The title at the top of the page for example.
+                    h3 Languages of the Web
                     p.
                         First of all, I need to explain a bit about computer languages. Computers aren't clever enough to
                         understand the languages we speak like English or French. We have to use simplified languages. The Web
@@ -71,10 +70,11 @@ html(lang="en")
                              <a href="http://www.w3schools.com/css/default.asp">W3C Schools</a> for more information on CSS.
                         dt JavaScript
                         dd
-                            JavaScript turns a web page from some boring text in to something that you can play. It tells the computer
-                             what to do if you push buttons. For example <code> alert('Hello'); </code> would pop up a little box
-                             saying Hello. Go to 
-                              <a href="http://www.w3schools.com/js/default.asp">W3C Schools</a> for more information on JavaScript.
+                            p.
+                                JavaScript turns a web page from some boring text in to something that you can play. It tells the computer
+                                 what to do if you push buttons. For example <code> alert('Hello'); </code> would pop up a little box 
+                                 saying Hello. Go to 
+                                 <a href="http://www.w3schools.com/js/default.asp">W3C Schools</a> for more information on JavaScript.
                     p.
                         To make these languages a bit easier to work with as humans, some people have come along and developed easier 
                         (in my opinion) versions to work with and given them different names:
@@ -103,6 +103,28 @@ html(lang="en")
                             pre
                                 code.
                                     .important.warning
+                        dt Stylus
+                        dd
+                            p.
+                                Stylus is a similar simplification of CSS. Rather than use curly brackets, colons, and semicolons
+                                 you put the selector on one line and the instructions for the team on the following lines indented
+                                 by one tab key.
+                            pre
+                                code.
+                                    #Bill
+                                        color Blue
+                        dt CoffeeScript
+                        dd
+                            p.
+                                CoffeeScript is an easier to write version of JavaScript. Again you have to use less brackets, curly brackets,
+                                and semicolons.
+                              pre
+                                code.
+                                    alert 'Hello'
+                                    
+                    h3 Help from others
+                    h3 So how can I change something
+                                
             .row
                 .span9.offset1.monitor#response
             .row
