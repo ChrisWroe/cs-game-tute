@@ -10,9 +10,9 @@ html(lang="en")
         link(rel="stylesheet",href="stylesheets/app.css")
         //script(type="text/javascript",src="http://github.com/jashkenas/coffee-script/raw/master/extras/coffee-script.js")
         :coffeescript
-            move_pattern = /go (north|south|east|west)/i
-            obey_instruction = (instruction)->
-                move_info = move_pattern.exec(instruction)
+            move_pattern = /^go (north|south|east|west)/i
+            obey_instruction = (beans)->
+                move_info = move_pattern.exec(beans)
                 response = ''
                 if move_info?
                     direction=move_info[1]
@@ -23,9 +23,9 @@ html(lang="en")
             
             $ -> 
                 $('#doit').click(()->
-                    instruction = $('#instruction').val() # the text within the box
-                    response = obey_instruction(instruction)
-                    $('#response').append("<p>#{response}</p>")
+                    instr = $('#instructionBox').val() # the text within the box
+                    resp = obey_instruction(instr)
+                    $('#response').append("<p>#{resp}</p>")
                 )
     body.application
         .container
@@ -41,7 +41,7 @@ html(lang="en")
             .row
                 .span9.offset1.input
                     .input-append
-                        input.span8#instruction(type="text",placeholder="tell me what to do...")
+                        input.span8#instructionBox(type="text",placeholder="tell me what to do...")
                         button.btn#doit(type="submit") Do it
             .row.
                 <a rel="license" href="http://creativecommons.org/licenses/by/3.0/deed.en_US"><img alt="Creative Commons License" style="border-width:0" src="http://i.creativecommons.org/l/by/3.0/88x31.png" /></a><br /><span xmlns:dct="http://purl.org/dc/terms/" property="dct:title">CoffeeScript Adventure Games Tutorial</span> by <a xmlns:cc="http://creativecommons.org/ns#" href="https://github.com/ChrisWroe/cs-game-tute" property="cc:attributionName" rel="cc:attributionURL">Chris Wroe</a> is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by/3.0/deed.en_US">Creative Commons Attribution 3.0 Unported License</a>.
