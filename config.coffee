@@ -32,10 +32,10 @@ exports.config =
         stylesheets:
             joinTo: 'stylesheets/app.css'
             order:
-                before: ['vendor/styles/normalize.css']
-                after: ['vendor/styles/helpers.css'
-                        'vendor/styles/bootstrap.css'
-                        'vendor/styles/bootstrap-responsive.css']
+                before: ['vendor/styles/normalize.css'
+                    'vendor/styles/bootstrap.css'
+                    'vendor/styles/bootstrap-responsive.css']
+                after: ['vendor/styles/helpers.css']
 
         templates:
             joinTo: 

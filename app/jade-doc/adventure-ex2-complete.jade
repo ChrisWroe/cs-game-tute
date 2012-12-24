@@ -10,9 +10,9 @@ html(lang="en")
         link(rel="stylesheet",href="stylesheets/app.css")
         //script(type="text/javascript",src="http://github.com/jashkenas/coffee-script/raw/master/extras/coffee-script.js")
         :coffeescript
-            move_regex = /go (north|south|east|west)/i
+            move_pattern = /go (north|south|east|west)/i
             obey_instruction = (instruction)->
-                move_info = move_regex.exec(instruction)
+                move_info = move_pattern.exec(instruction)
                 response = ''
                 if move_info?
                     direction=move_info[1]

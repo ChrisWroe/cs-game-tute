@@ -42,8 +42,8 @@ html(lang="en")
                     pre
                         code.
                             obey_instruction = (instruction)->
-                                move_regex = /go (north|south|east|west)/i
-                                move_info = move_regex.exec(instruction)
+                                move_pattern = /go (north|south|east|west)/i
+                                move_info = move_pattern.exec(instruction)
                                 response = ''
                                 if move_info?
                                     direction=move_info[1]
@@ -62,7 +62,7 @@ html(lang="en")
                         | Things in brackets are usually the things that we are feeding the function.
                     pre
                         code
-                            |    move_regex = /go (north|south|east|west)/i
+                            |    move_pattern = /go (north|south|east|west)/i
                     p
                         | This next line is indented. Remember indenting it tells the computer what something belongs to. 
                         | These next lines belong to the function 'obey_instruction'.
