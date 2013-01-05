@@ -1,0 +1,41 @@
+h2 Instructions
+p.
+    The aim of this exercise is to split the game into several simpler file and to add basic room and 
+    player information. 
+p.
+    Open up the following file in a text editor. 
+pre
+    code app/jade-doc/adventure-ex3.jade
+p.
+    Look for some text near the top of the file that says this
+// dont change this one this is just the instructions!
+pre
+    code.
+       script(src="javascripts/app.js")
+// dont change this one this is just the instructions!
+p.
+    Change the text to say this then save.
+pre
+    code.
+        script(src="javascripts/app.js", defer, onload="require('initialize');")
+p.
+    Rather than using the code in the webpage we are going to use code in several different
+     files. This makes it easier to maintain. I'm not sure  what defer does, but onload="require('initialize');" 
+     runs a function called require when the javascript file app.js is loaded. Require is a function that will
+     try and load the file named in the brackets. In this case 'initialize'. I've already created a file called 
+     initialize.coffee with the following code:
+pre
+    code.
+        # App Namespace
+        @Adventure ?= {}
+        Adventure.Game ?= {}
+
+        $ ->
+            # Initialize App
+            Adventure.Game = require 'code/game'
+p.
+    This in turn loads a file game.coffee in the code directory. This is where we are going to put the code to 
+     run our game that up until now we have put in the webpage itself.
+     
+     
+

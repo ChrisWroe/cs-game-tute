@@ -3,23 +3,28 @@ html(lang="en")
     head
         title Wroe Family Adventure Game
         script(src="javascripts/vendor.js")
-        script(src="javascripts/app.js", defer, onload="require('initialize');")
+        script(src="javascripts/app.js")
         link(rel="stylesheet",href="stylesheets/app.css")
     body.application
         .container
             .row
-                .span9.offset1
+                .span11.offset1
                     h1 Wroe Family Adventure Game
                     h2 Third Experiment
                     p.
-                        Into here
+                        Now we want to add some rooms to the adventure game. As we will be adding more 
+                        information, it makes sense to start splitting the game in to several different
+                         files. In one file we will have the game functionality, in another file the 
+                         information about the rooms, and in another we will have information about
+                         the player.
                     .row 
                         .span8.game
                             .span7
                                 h4.game Adventure in the Wilderness
-                                #response
+                                .monitor
+                                    #response
                                 h4.game What's your next move?
                                 .input-append
                                     input.span6#instruction(type="text",placeholder="tell me what to do...")
                                     button.btn#doit(type="submit") Do it
-                    //include includes/_instructions-exXX
+                    include includes/_instructions-ex3

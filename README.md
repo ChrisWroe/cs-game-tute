@@ -1,6 +1,8 @@
 cs-game-tut
 ===========
 
+Unfinished work in progress
+
 An experiment in teaching my kids to program adventure games in coffee script. 
 
 ### CoffeeScript

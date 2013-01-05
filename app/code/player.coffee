@@ -1,0 +1,2 @@
+exports.player =
+    position: 'bedroom'

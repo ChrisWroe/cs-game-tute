@@ -1,38 +1,35 @@
 exports.rooms = rooms =
     bedroom:
-        id : '1'
         description: 'A bedroom'
         exits:
-            east: 2
-    2:
-        id: 2
+            east: 'landing'
+    landing:
         description: 'The landing'
-        exists: 
-            west: 1
+        exits: 
+            west: 'bedroom'
+            east: 'dungeon'
     dungeon:
         description: 'a dark room with almost nothing in it. it smells funny'
         exits:
-            north: 4
-            west: 2
+            north: 'hall'
+            west: 'landing'
             
     hall:
         description: 'the main hallway. you can exit the castle from here'
         exits:
-            north: 5
-            south: 1
+            north: 'path'
+            south: 'bedroom'
     
     path:
         description: 'a long winding path'
         exits:
-            north: 6
+            north: 'forest'
             
     forest:
         description:'a deep dark forest filed with poisonous plants and vicious beasts'
         exits:
-            north: 7
-            south: 5
-            east: 8
-            west: 9
+            south: 'path'
+
     
         
            
