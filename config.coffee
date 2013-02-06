@@ -1,7 +1,7 @@
 exports.config =
     # See docs at http://brunch.readthedocs.org/en/latest/config.html.
     coffeelint:
-        pattern: /^app\/.*\.coffee$/
+        pattern: /^app\/code-complete\/\.coffee$/
         options:
             indentation:
                 value: 4
@@ -9,14 +9,15 @@ exports.config =
             max_line_length: 
                 value: 120
     jade:
-        pretty: yes # Adds pretty-indentation whitespaces to output (false by default)
+        pretty: true # Adds pretty-indentation whitespaces to output (false by default)
     static_jade:                        # all optionals
         path:       [ /app(\/|\\)jade-doc/ ] 
-        pretty: yes
+        pretty: true
     files:
         javascripts:
             joinTo:
-                'javascripts/app.js': /^app/
+                #'javascripts/app.js': /(^app\/code-complete\/|^app\/initialize.coffee$)/
+                'javascripts/app.js': /(^app\/code\/|^app\/initialize.coffee$)/
                 'javascripts/vendor.js': /^vendor/
                 'test/javascripts/test.js': /^test(\/|\\)(?!vendor)/
                 'test/javascripts/test-vendor.js': /^test(\/|\\)(?=vendor)/
@@ -39,4 +40,4 @@ exports.config =
 
         templates:
             joinTo: 
-                'javascripts/app.js'
+                'javascripts/templates.js': /.+\.jade$/

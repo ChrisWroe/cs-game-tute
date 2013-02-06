@@ -6,11 +6,11 @@ html(lang="en")
         script(src="javascripts/app.js")
         link(rel="stylesheet",href="stylesheets/app.css")
     body.application
-        .container
+        .container  
             .row
                 .span11.offset1
                     h1 Wroe Family Adventure Game
-                    h2 Third Experiment
+                    h2 Third Experiment 
                     p.
                         Now we want to add some rooms to the adventure game. As we will be adding more 
                         information, it makes sense to start splitting the game in to several different
@@ -21,10 +21,10 @@ html(lang="en")
                         .span8.game
                             .span7
                                 h4.game Adventure in the Wilderness
-                                .monitor
-                                    #response
+                                #response 
                                 h4.game What's your next move?
                                 .input-append
                                     input.span6#instruction(type="text",placeholder="tell me what to do...")
                                     button.btn#doit(type="submit") Do it
                     include includes/_instructions-ex3
+            include includes/_licence

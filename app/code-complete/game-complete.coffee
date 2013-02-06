@@ -1,5 +1,5 @@
-rooms = require('code/rooms').rooms
-player = require('code/player').player
+rooms = require('code-complete/rooms-complete').rooms
+player = require('code-complete/player-complete').player
 
 move_pattern = /go (north|south|east|west)/i
 obey_instruction = (instruction)->
@@ -38,8 +38,7 @@ game_loop = ()->
         tell_position()
         
         
-
-$ -> 
+exports.initialize = () -> 
     tell_position()
 
     $('#doit').click(game_loop)

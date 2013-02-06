@@ -1,7 +1,8 @@
 h2 Instructions
 p.
-    The aim of this exercise is to split the game into several simpler file and to add basic room and 
-    player information. 
+    The aim of this exercise is to split the game into several simpler files and to add basic room and 
+    player information.
+h3 Load the game code from separate files
 p.
     Open up the following file in a text editor. 
 pre
@@ -20,22 +21,293 @@ pre
         script(src="javascripts/app.js", defer, onload="require('initialize');")
 p.
     Rather than using the code in the webpage we are going to use code in several different
-     files. This makes it easier to maintain. I'm not sure  what defer does, but onload="require('initialize');" 
-     runs a function called require when the javascript file app.js is loaded. Require is a function that will
-     try and load the file named in the brackets. In this case 'initialize'. I've already created a file called 
-     initialize.coffee with the following code:
+     files. This makes it easier to maintain. <code>defer</code> tells the browser to wait until the page has finished loading before 
+     running this code, and <code>onload="require('initialize');"</code> tells it what to run in the code when that has happened. 
+     In this case it
+     runs a function called <code>require</code> when the javascript file <code>app.js</code> is loaded. Require is a function that will
+     try and load the file named in the brackets. In this case <code>initialize</code>. 
+h3 Create an initialize.coffee file
+p.
+    Create a file called initialize.coffee in the app directory (this is the file we told the web page to find in the code above). Then open this file and add in the following code.
+pre
+    code 
+        | # App Namespace
+        | @Adventure ?= {}
+        | Adventure.Game ?= {}
+        | $ ->
+        |    # Initialize App
+        |    Adventure.Game =  = game =require 'code/game'
+        |    game.initialize()
+p.
+    The @ symbol is short for 'this.'. I'm not 100% how things are being set up. The aim is to set up
+     some variables that are available to other files. We will skip explaining this for now.
+     The <code>$ -></code> line is using the JQuery <code>$</code> function. This means that the following indented 
+     lines will get run when 
+     the web page has finished loading. The next line runs the require function again this time on a file in the 
+     code subdirectory called game.coffee. The final line calls a function in the game file called <code>initialize</code>. We 
+     will come across this later on. We use it to set the game up.
+h3 Create a game.coffee file
+p.
+    This is where we are going to put the code to run our game that up until now we have put in the webpage itself.
+     Create a file called game.coffee in the app/code directory. Then open this file and add in the following code.
+pre
+    code
+        | move_pattern = /^go (north|south|east|west)/i
+        | obey_instruction = (beans)->
+        |    move_info = move_pattern.exec(beans)
+        |    response = ''
+        |    if move_info?
+        |        direction=move_info[1]
+        |        response = "You went \#{direction}"
+        |    else
+        |        response = "I don't understand yet"
+        |    response
+        | $ -> 
+        |    $('#doit').click(()->
+        |        instr = $('#instruction').val() # the text within the box
+        |        resp = obey_instruction(instr)
+        |        $('#response').append("&lt;p&gt;\#{resp}&lt;/p&gt;")
+        |    )
+p.
+     This is the same code we used for the last exercise. It understands how to respond to go north,south,
+      east or west.
+p.
+     Try and run this example by typing brunch w -s in the console open on the cs-game-tute directory. It should work as 
+      before. 
+h3 Create some rooms in rooms.coffee
+p.
+    Next we are going to create a new file called rooms.coffee in the code directory. In it we are going to store room 
+    information as one object called rooms. Each room is going to have a short name, a description, and exits. Here is an 
+    example
 pre
     code.
-        # App Namespace
-        @Adventure ?= {}
-        Adventure.Game ?= {}
-
-        $ ->
-            # Initialize App
-            Adventure.Game = require 'code/game'
+        exports.rooms = rooms =
+            bedroom:
+                description: 'A bedroom'
+                exits:
+                    east: 'landing'
 p.
-    This in turn loads a file game.coffee in the code directory. This is where we are going to put the code to 
-     run our game that up until now we have put in the webpage itself.
-     
-     
+    The first line says we want to describe an object called <code>rooms</code>. We also want this object accessible in other files 
+    so we add it to the exports object with the same name 'rooms' (<code>export.rooms=rooms=</code>).
+code exports.rooms = rooms =
+p.
+    We then use coffee script's concise way of describing JSON or JavaScript Object Notation. Objects have keys that open the 
+     door to values. The values of an object are also called the attributes of that object. The keys to open the door to the
+     values are also called the attribute names. A value can be an object which itself has keys to doors with other values. 
+     Indentation is used to describe 
+     which object we are talking about. Keys for the same object are grouped together at the same level.
+p.
+    So in the example above
+     we have given rooms a <code>bedroom</code> key. Keys are followed by a colon ':'. If a key needs to have spaces in it we would have to put 
+     it in quotes, for example <code>'bed room'</code>. The value that the bedroom key opens is itself another object with its own keys. 
+     These are <code>description:</code> and <code>exits:</code>. The value that 'description' opens is some text and so this is surrounded by quotes 
+     (<code>description: 'A bedroom'</code>). 
+     The value that the 'exits' key opens, is another object which has a key <code>east:</code>.
+h3 Create a player to move around the rooms
+p.
+    The obvious thing to do now is to move around the rooms. This is a good time to start telling the game that there is a 
+     player and that the player has a current position in one of the rooms.
+p.
+    Create a file called player.coffee in the code directory. At the moment we are just going to describe a player object 
+     which has one key (or attribute) called 'position'. Copy the following into the player.coffee file:
+pre
+    code.
+        exports.player =
+            position: 'bedroom'
+p.
+    Now we will change our game code around a bit to cope with a player, tell the user where the player is and move the
+     player's position if we type in a 'move' instruction.
+h4 A game loop
+p.
+    Many game programs repeat the same core instructions over and over again. First it works out if the user has done something
+     like press a key or move the mouse. It works out what effect that would have in the game. Could the player move the way the
+     user wants? Have they bumped in to a monster? Have they picked up something useful? It then works out what the other characters
+     in the game will do. Will they react to the player? Will they just do something anyway? Finally it works out how to tell the
+     user what has happened. In our case this will be describing what is happening in text. In other games it may redraw a three
+     dimensional landscape from a slightly different position.
+p.
+    We are going to put in a simple game loop
+pre
+    code.
+        game_loop = ()->
+                instruction = $('#instruction').val() # the text within the box
+                response = obey_instruction(instruction)
+                add_response(response)
+                tell_position()
+p.
+    The first line (<code>game_loop = ()-></code>) sets up a function called 'game_loop' that doesn't need any input data, 
+     so has empty brackets. The second
+     line gets the text the user has typed in the instruction text box. The next line calls our function called 'obey_instruction'.
+     The third line calls a function we have yet to write called 'add_response'. This will take some text returned from the 
+     'obey_instruction' function and show that text to the user on the webpage. Finally the last line calls a function we have yet to
+     write called 'tell_position'. That will show text to the user on the webpage describing where the player is.
+h4 Initializing the game
+p.
+    Now we have to call the game loop at the relevant times. We set this up in a function called initialize which gets called 
+     when the webpage is first loaded. Add the following code to the game.coffee file.
+pre
+    code.
+        exports.initialize = () -> 
+            tell_position()
 
+            $('#doit').click(game_loop)
+            $('#instruction').keyup((event)->
+                if event.keyCode is 13
+                    game_loop()
+                )
+p.
+    This defines the initialize function. It does not have any inputs, so the brackets on the first line are empty. They
+     first thing it does is call the tell_position function. The next two bits tell it to run the game loop either if the
+     user presses the button, or they press enter in the instrucion text box (13 is the code for the enter key).
+h4 The tell_position function
+p.
+    This is used to tell the user where their player character is. It is called at the start of the game, and after responding
+     to an instruction from the user. Add the following code o the game.coffee file.
+pre
+    code.
+        tell_position = () ->
+            exits_string = _.keys(rooms[player.position].exits).join(', ')
+            add_response("You are in the \#{player.position}. You can go \#{exits_string}")
+p.
+    The first line just says we want to define a function called tell_position that does not require any inputs. The second
+     line builds up the list of exits that are available in the room. 
+     We get 
+      hold of the current room by taking the player's current position (<code>player.position</code>) and using it as 
+      the key to access the specific room
+      in the rooms object (<code>rooms[player_position]</code>). We then get the exits for this room 
+      (<code>rooms[player_position].exits</code>) 
+      To just get the name of the exit rather then also getting the object accessed with the key we use a library of 
+      functions called underscore. We 
+     need to use a specific one called keys (<code>_.keys()</code>). Finally once we have all the keys (e.g. the name of the exits)
+     we join them all together in a single string with a comma and a space between each exit (<code>.join(', ')</code>)
+p.
+    The next line calls the function add_response to tell the user what the exits are. It uses a special feature that lets you
+     insert values into strings. using <code>\#{}</code>. So when it says <code>"You are in \#{player.position}</code> it will 
+     insert the current player position to produce this text "You are in the bedroom".
+h4 The add_response function
+p.
+    In the previous exercise when we wanted to tell the user something we used this line of code:
+pre
+    code $('#response').append("&lt;p&gt;\#{resp}&lt;/p&gt;")
+p.
+    Now we are going to do something a bit more complicated and so we will move this into a function of its own called 
+     <code>add_response</code>. Copy the following into the game.coffee file:
+pre
+    code.
+        add_response = (response) ->
+            text_box = $('#response')
+            text_box.append("&lt;p&gt;\#{response}&lt;/p&gt;")
+
+            # make sure text is scrolled to the bottom
+            height = text_box.prop('scrollHeight')
+            if height > 150
+                text_box.scrollTop(height-150)
+p.
+    <code>add_response = (response) -></code> tells it we want to define a function called add_response and it will take one
+     input, <code>response</code> which will be the text we want to show the user.
+p.
+    The next two lines are similar to what we had before. They add the text in a p (paragraph) element in the <code>#response</code> 
+     div
+p.
+    The final three lines make sure that if we have added lots of text to this box, the text will scroll up, so we can see the last
+     the text we have recently added. Otherwise the new text will disappear off the bottom of the box.
+h4 Modifying the obey_instruction function
+p.
+    We need to modify the obey_instruction function to check if the player can go the way the user has said to go. In other words,
+     is there an exit to the room that way? We also need to update the player position if it was possible to move that way. Copy the
+     following in to game.coffee
+pre
+    code.
+        obey_instruction = (instruction)->
+            move_info = move_pattern.exec(instruction)
+            response = ''
+            if move_info?
+                direction=move_info[1]
+
+                if direction in _.keys(rooms[player.position].exits)
+                    new_position = rooms[player.position].exits[direction]
+                    response = "You went \#{direction}."
+                    player.position = new_position
+                else
+                    response = "You cannot go that way"
+            else
+                response = "I don't understand yet"
+            response
+p.
+    A key line is <code>if direction in _.keys(rooms[player.position].exits)</code>. This uses the same code we saw earlier to list exits,
+     but in this case it takes that list of exists and checks if the direction the user has said to go is in that list (<code>if direction in</code>).
+p.
+    Another key line is <code>new_position = rooms[player.position].exits[direction]</code>. So if the direction is an exit, we move the player
+     to whatever room we have said is the value of the exit key. So if the user has told it to 'go east' and the room had the following
+     <code>east: landing</code> the <code>new_position</code> would be <code>landing</code>. We can then set the 
+     <code>player.position</code> to this value.
+p.
+    If an exit doesn't exist in the direction the user has said to go, our response will be "You cannot go that way". If 
+     the instruction the user gives doesn't fit the pattent go <direction>, then our response will be "I don't understand yet".
+p.
+    Finally we return the response. The last thing we mention in the function will be the thing that is returned from it. To make
+     that more explicit we could have said <code>return response</code>.
+h4 Final bits
+p.
+    Just a few more bits to link everything up. Copy the following at the start of game.coffee
+pre
+    code.
+        rooms = require('code/rooms').rooms
+        player = require('code/player').player
+p.
+    This makes sure the when we talk about <code>rooms</code> and <code>player</code> in our code, it knows what we mean. 
+     They are the objects defined in our code/rooms.coffee and code/player.coffee files.
+p.
+    Your game.coffee file should look something like this:
+pre
+    code.
+        rooms = require('code/rooms').rooms
+        player = require('code/player').player
+
+        move_pattern = /go (north|south|east|west)/i
+        obey_instruction = (instruction)->
+            move_info = move_pattern.exec(instruction)
+            response = ''
+            if move_info?
+                direction=move_info[1]
+
+                if direction in _.keys(rooms[player.position].exits)
+                    new_position = rooms[player.position].exits[direction]
+                    response = "You went \#{direction}."
+                    player.position = new_position
+                else
+                    response = "You cannot go that way"
+            else
+                response = "I don't understand yet"
+            response
+
+        add_response = (response) ->
+            text_box = $('#response')
+            text_box.append("&lt;p>\#{response}&lt;/p>")
+
+            # make sure text is scrolled to the bottom
+            height = text_box.prop('scrollHeight')
+            if height > 150
+                text_box.scrollTop(height-150)
+
+        tell_position = () ->
+            exits_string = _.keys(rooms[player.position].exits).join(', ')
+            add_response("You are in the \#{player.position}. You can go \#{exits_string}")
+
+        game_loop = ()->
+                instruction = $('#instruction').val() # the text within the box
+                response = obey_instruction(instruction)
+                add_response(response)
+                tell_position()
+
+
+        exports.initialize = () -> 
+            tell_position()
+
+            $('#doit').click(game_loop)
+            $('#instruction').keyup((event)->
+                if event.keyCode is 13
+                    game_loop()
+                )
+
+        
