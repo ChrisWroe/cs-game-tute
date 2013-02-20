@@ -23,7 +23,7 @@
     "stylus-brunch": ">= 1.0 < 1.5",
 
     "jade-brunch": "> 1.0 < 1.5",
-    "static-jade-brunch": "git+ssh://git@github.com:ChrisWroe/static-jade-brunch.git",
+    "static-jade-brunch": "git://github.com/ChrisWroe/static-jade-brunch.git",
     
     "uglify-js-brunch": ">= 1.0 < 1.5",
     "clean-css-brunch": ">= 1.0 < 1.5"
